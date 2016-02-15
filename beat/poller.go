@@ -41,7 +41,7 @@ func (p *Poller) Run() {
 	}
 
 	cron := cron.New()
-	cron.AddFunc(p.config.Cron, func() { p.runOneTime() })
+	cron.AddFunc(p.cron, func() { p.runOneTime() })
 	cron.Start()
 }
 
