@@ -5,7 +5,7 @@ GOFILES = $(shell find . -type f -name '*.go')
 httpbeat: $(GOFILES)
 	# first make sure we have godep
 	go get github.com/tools/godep
-	$(GODEP) go build
+        env GOOS=linux GOARCH=amd64 $(GODEP) go build
 
 .PHONY: getdeps
 getdeps:
@@ -36,7 +36,7 @@ gofmt:
 cover:
 	# gotestcover is needed to fetch coverage for multiple packages
 	go get github.com/pierrre/gotestcover
-	GOPATH=$(shell $(GODEP) path):$(GOPATH) $(GOPATH)/bin/gotestcover -coverprofile=profile.cov -covermode=count github.com/christiangalsterer/httpbeat/...
+	GOPATH=$(shell $(GODEP) path):$(GOPATH) $(GOPATH)/bin/gotestcover -coverprofile=profile.cov -covermode=count github.com/kussj/httpbeat/...
 	mkdir -p cover
 	$(GODEP) go tool cover -html=profile.cov -o cover/coverage.html
 

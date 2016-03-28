@@ -33,6 +33,11 @@ func (p *Poller) Run() {
 		p.config.DocumentType = DefaultDocumentType
 	}
 
+	// Setup Method if unspecified
+	if p.config.Method == "" {
+		p.config.Method = "get"
+	}
+
 	//init the cron schedule
 	if p.config.Cron != "" {
 		p.cron = p.config.Cron
